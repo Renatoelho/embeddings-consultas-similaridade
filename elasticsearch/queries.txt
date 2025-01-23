@@ -1,0 +1,30 @@
+
+GET embeddings/_search
+
+GET embeddings/_search
+{
+  "_source": ["texto"],
+  "script_fields": {
+    "embedding_preview": {
+      "script": {
+        "source": "params['_source']['embedding'].subList(0, 5)"
+      }
+    }
+  }
+}
+
+PUT /embeddings
+{
+  "mappings": {
+    "properties": {
+      "texto": {
+        "type": "text"
+      },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 1536
+      }
+    }
+  }
+}
+
